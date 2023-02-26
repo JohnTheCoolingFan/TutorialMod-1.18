@@ -94,6 +94,7 @@ public class PressingRecipeBuilder implements RecipeBuilder {
 
             JsonObject ingredient_json = this.ingredient.toJson().getAsJsonObject();
             ingredient_json.addProperty("count", this.ingredient_count);
+            jsonObject.add("ingredient", ingredient_json);
             jsonObject.addProperty("result", ForgeRegistries.ITEMS.getKey(this.result).toString());
             jsonObject.addProperty("count", this.result_count);
         }

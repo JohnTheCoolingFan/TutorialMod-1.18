@@ -3,6 +3,7 @@ package ru.jtcf.tutorial.data;
 import net.minecraft.world.item.ItemStack;
 import ru.jtcf.tutorial.TutorialMod;
 import ru.jtcf.tutorial.crafting.recipe.PressingRecipe;
+import ru.jtcf.tutorial.crafting.recipe.PressingRecipeBuilder;
 import ru.jtcf.tutorial.setup.ModBlocks;
 import ru.jtcf.tutorial.setup.ModItems;
 import net.minecraft.data.DataGenerator;
@@ -41,7 +42,7 @@ public class ModRecipeProvider extends RecipeProvider {
             .unlockedBy("has_item", has(ModBlocks.SILVER_ORE.get()))
             .save(consumer, modId("silver_ingot_blasting"));
 
-        new SingleItemRecipeBuilder(ModRecipes.Serializers.PRESSING.get(), Ingredient.of(new ItemStack(ModItems.SILVER_INGOT.get())), ModBlocks.SILVER_BLOCK.get(), 1)
+        new PressingRecipeBuilder(Ingredient.of(new ItemStack(ModItems.SILVER_INGOT.get())), 9, ModBlocks.SILVER_BLOCK.get(), 1)
                 .unlockedBy("has_item", has(ModItems.SILVER_INGOT.get()))
                 .save(consumer, modId("silver_block_pressing"));
     }

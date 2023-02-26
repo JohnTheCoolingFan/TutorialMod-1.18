@@ -1,7 +1,8 @@
 {
   "type": "tutorial:pressing",
   "ingredient": {
-    "item": "tutorial:silver_ingot"
+    "item": "tutorial:silver_ingot",
+    "count": 9
   },
   "result": "tutorial:silver_block",
   "count": 1

@@ -171,7 +171,7 @@ public class MetalPressBlockEntity extends BaseContainerBlockEntity implements W
 
         progress = 0;
         energyStorage.extractEnergy(ENERGY_USAGE_PER_CYCLE, false);
-        this.removeItem(0, 1);
+        this.removeItem(0, recipe.getIngredientCount());
         setChanged();
     }
 

@@ -17,6 +17,7 @@ public class TutorialMod
     private static final Logger LOGGER = LogManager.getLogger();
 
     public TutorialMod () {
+        LOGGER.info("Registering stuff");
         Registration.register();
 
         // Register ourselves for server and other game events we are interested in

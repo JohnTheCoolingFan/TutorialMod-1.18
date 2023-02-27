@@ -4,6 +4,7 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.helpers.IJeiHelpers;
+import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
@@ -11,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import ru.jtcf.tutorial.TutorialMod;
+import ru.jtcf.tutorial.block.metalpress.MetalPressScreen;
 import ru.jtcf.tutorial.setup.ModBlocks;
 
 @JeiPlugin
@@ -40,5 +42,10 @@ public class TutorialModJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(ModBlocks.METAL_PRESS.get()), PressingCategory.TYPE);
+    }
+
+    @Override
+    public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+         registration.addRecipeClickArea(MetalPressScreen.class, 80, 35, 22, 15, PressingCategory.TYPE);
     }
 }

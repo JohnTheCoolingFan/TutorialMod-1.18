@@ -50,22 +50,23 @@ public class MetalPressBlockEntity extends BaseContainerBlockEntity implements W
 
         @Override
         public int get(int index) {
-            if (index == 0) {
-                return progress;
-            } else if (index == 1) {
-                return energyStorage.getEnergyStored();
-            }
-            return 0;
+            return switch(index) {
+                case 0 -> progress;
+                case 1 -> energyStorage.getEnergyStored();
+                default -> 0;
+            };
         }
 
         @Override
         public void set(int index, int value) {
-            if (index == 0) {
-                progress = value;
-            } else if (index == 1) {
-                int energy_to_receive = value - energyStorage.getEnergyStored();
-                while (energy_to_receive != 0) {
-                    energy_to_receive -= energyStorage.receiveEnergy(energy_to_receive, false);
+            switch(index) {
+                case 0 -> progress = value;
+                case 1 -> {
+                    int energy_to_receive = value - energyStorage.getEnergyStored();
+                    while (energy_to_receive != 0) {
+                        energy_to_receive -= energyStorage.receiveEnergy(energy_to_receive, false);
+                    }
+
                 }
             }
         }

@@ -3,7 +3,7 @@ package ru.jtcf.tutorial.block.metalpress;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
-import org.jetbrains.annotations.NotNull;
+import net.minecraftforge.energy.IEnergyStorage;
 import ru.jtcf.tutorial.crafting.recipe.PressingRecipe;
 import ru.jtcf.tutorial.setup.ModBlockEntityTypes;
 import ru.jtcf.tutorial.setup.ModRecipes;
@@ -44,7 +44,7 @@ public class MetalPressBlockEntity extends BaseContainerBlockEntity implements W
     private int progress = 0;
 
     public final EnergyStorage energyStorage;
-    private final LazyOptional<EnergyStorage> energyHandler;
+    private final LazyOptional<IEnergyStorage> energyHandler;
 
     public final ContainerData fields = new ContainerData() {
 

@@ -1,1 +1,1 @@
-Port of SilentChaos512's 1.16 tutorial mod to 1.18 and finished features
+Port of SilentChaos512's 1.16 tutorial mod to 1.18 and finished features, intended to be used as an example of how some things could be done. Not that it's the best practice, just what SilentChaos512 and a few others taught me

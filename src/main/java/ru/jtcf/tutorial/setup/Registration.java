@@ -1,7 +1,5 @@
 package ru.jtcf.tutorial.setup;
 
-import net.minecraft.world.item.crafting.Recipe;
-import ru.jtcf.tutorial.TutorialMod;
 import net.minecraft.core.Registry;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
@@ -19,8 +17,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import ru.jtcf.tutorial.crafting.recipe.PressingRecipe;
+import ru.jtcf.tutorial.TutorialMod;
 
+// Some otehr tutorials show registries being members of separate general registry class that gets passed modEventBus
+// to register, eliminating the need to call a dummy register method to load the classes and avoid a runtime error.
 public class Registration {
     public final static DeferredRegister<Block> BLOCKS = createDeferredRegister(ForgeRegistries.BLOCKS);
     public final static DeferredRegister<MenuType<?>> CONTAINERS = createDeferredRegister(ForgeRegistries.CONTAINERS);

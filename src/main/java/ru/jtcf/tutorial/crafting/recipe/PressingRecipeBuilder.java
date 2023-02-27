@@ -19,6 +19,7 @@ import ru.jtcf.tutorial.setup.ModRecipes;
 
 import java.util.function.Consumer;
 
+// Mostly a copy of SingleItemRecipeBuilder, not sure why I didn't just extend it to reduce code repetition.
 public class PressingRecipeBuilder implements RecipeBuilder {
     private final Ingredient ingredient;
     private final int ingredient_count;
@@ -36,6 +37,7 @@ public class PressingRecipeBuilder implements RecipeBuilder {
         this.result = result.asItem();
         this.result_count = result_count;
     }
+
     @Override
     public RecipeBuilder unlockedBy(String crit_name, CriterionTriggerInstance crit) {
         this.advancement.addCriterion(crit_name, crit);
@@ -52,6 +54,7 @@ public class PressingRecipeBuilder implements RecipeBuilder {
     public Item getResult() {
         return this.result;
     }
+
     private void ensureValid(ResourceLocation p_126330_) {
         if (this.advancement.getCriteria().isEmpty()) {
             throw new IllegalStateException("No way of obtaining recipe " + p_126330_);

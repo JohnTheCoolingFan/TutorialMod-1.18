@@ -15,10 +15,13 @@ import ru.jtcf.tutorial.TutorialMod;
 import ru.jtcf.tutorial.block.metalpress.MetalPressScreen;
 import ru.jtcf.tutorial.setup.ModBlocks;
 
+// This is messy since I just wanted jsut to make it work. In the end, I'm quite satisfied with the result, although
+// many things were just copied from vanilla plugin
 @JeiPlugin
 public class TutorialModJeiPlugin implements IModPlugin {
 
-    public TutorialModJeiPlugin() {}
+    public TutorialModJeiPlugin() {
+    }
 
     @Override
     @NotNull
@@ -46,6 +49,8 @@ public class TutorialModJeiPlugin implements IModPlugin {
 
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-         registration.addRecipeClickArea(MetalPressScreen.class, 80, 35, 22, 15, PressingCategory.TYPE);
+        // The area is set to a bounding box of an arrow. I don't know for sure what size around the arrow it
+        // should be, but definitely bigger, judging by the vanilla crafting table click area size
+        registration.addRecipeClickArea(MetalPressScreen.class, 80, 35, 22, 15, PressingCategory.TYPE);
     }
 }

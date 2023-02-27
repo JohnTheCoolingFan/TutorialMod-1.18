@@ -1,7 +1,5 @@
 package ru.jtcf.tutorial.block.metalpress;
 
-import ru.jtcf.tutorial.setup.ModBlocks;
-import ru.jtcf.tutorial.setup.ModContainerTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -11,7 +9,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import ru.jtcf.tutorial.setup.ModBlocks;
+import ru.jtcf.tutorial.setup.ModContainerTypes;
 
+// I know that it's called Menus instead of Containers now, I just wanted to keep it like in the original mod.
 public class MetalPressContainer extends AbstractContainerMenu {
     private final ContainerData fields;
 
@@ -77,7 +78,7 @@ public class MetalPressContainer extends AbstractContainerMenu {
         return 0;
     }
 
-	@Override
+    @Override
     public boolean stillValid(Player player) {
         return stillValid(container_access, player, ModBlocks.METAL_PRESS.get());
     }

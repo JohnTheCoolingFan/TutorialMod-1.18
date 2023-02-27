@@ -1,12 +1,5 @@
 package ru.jtcf.tutorial.block.metalpress;
 
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.EnergyStorage;
-import net.minecraftforge.energy.IEnergyStorage;
-import ru.jtcf.tutorial.crafting.recipe.PressingRecipe;
-import ru.jtcf.tutorial.setup.ModBlockEntityTypes;
-import ru.jtcf.tutorial.setup.ModRecipes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -22,16 +15,24 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
+import ru.jtcf.tutorial.crafting.recipe.PressingRecipe;
+import ru.jtcf.tutorial.setup.ModBlockEntityTypes;
+import ru.jtcf.tutorial.setup.ModRecipes;
 
 import javax.annotation.Nullable;
 
+// I have been told to not use the vanilla container classes and inetrfaces, but I think it's ok.
 public class MetalPressBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, BlockEntityTicker<MetalPressBlockEntity> {
     static final int WORK_TIME = 2 * 20;
     static final int ENERGY_USAGE_PER_CYCLE = 100;

@@ -82,23 +82,9 @@ public class MetalPressBlockEntity extends BaseContainerBlockEntity implements W
         this.handlers = SidedInvWrapper.create(this, Direction.UP, Direction.DOWN, Direction.NORTH);
         this.items = new ItemStackHandler(2) {
             @Override
-            public void setStackInSlot(int slot, @NotNull ItemStack stack) {
+            protected void onContentsChanged(int slot) {
                 setChanged();
-                super.setStackInSlot(slot, stack);
-            }
-
-            @NotNull
-            @Override
-            public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-                setChanged();
-                return super.insertItem(slot, stack, simulate);
-            }
-
-            @NotNull
-            @Override
-            public ItemStack extractItem(int slot, int amount, boolean simulate) {
-                setChanged();
-                return super.extractItem(slot, amount, simulate);
+                super.onContentsChanged(slot);
             }
         };
         this.energyStorage = new EnergyStorage(MAX_ENERGY, MAX_TRANSFER);

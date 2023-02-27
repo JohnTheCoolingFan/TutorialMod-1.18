@@ -1,6 +1,5 @@
 package ru.jtcf.tutorial.block.metalpress;
 
-import ru.jtcf.tutorial.setup.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
@@ -23,9 +22,9 @@ import javax.annotation.Nullable;
 public class MetalPressBlock extends HorizontalDirectionalBlock implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
-	public MetalPressBlock(Properties properties) {
-		super(properties);
-	}
+    public MetalPressBlock(Properties properties) {
+        super(properties);
+    }
 
     @Nullable
     @Override
@@ -49,13 +48,13 @@ public class MetalPressBlock extends HorizontalDirectionalBlock implements Entit
         return InteractionResult.CONSUME;
     }
 
-	private void interactWith(Level world, BlockPos pos, Player player) {
+    private void interactWith(Level world, BlockPos pos, Player player) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof MetalPressBlockEntity te && player instanceof ServerPlayer) {
             MenuProvider container = new SimpleMenuProvider(MetalPressContainer.getServerContainer(te, pos), getName());
             NetworkHooks.openGui((ServerPlayer) player, container, te::encodeExtraData);
         }
-	}
+    }
 
     @Nullable
     @Override

@@ -1,19 +1,19 @@
 package ru.jtcf.tutorial.data;
 
-import ru.jtcf.tutorial.TutorialMod;
-import ru.jtcf.tutorial.setup.ModItems;
-import ru.jtcf.tutorial.setup.ModTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import ru.jtcf.tutorial.TutorialMod;
+import ru.jtcf.tutorial.setup.ModItems;
+import ru.jtcf.tutorial.setup.ModTags;
 
 public class ModItemTagsProvider extends ItemTagsProvider {
 
-	public ModItemTagsProvider(DataGenerator dataGenerator, BlockTagsProvider blockTagProvider, ExistingFileHelper existingFileHelper) {
-		super(dataGenerator, blockTagProvider, TutorialMod.MODID, existingFileHelper);
-	}
+    public ModItemTagsProvider(DataGenerator dataGenerator, BlockTagsProvider blockTagProvider, ExistingFileHelper existingFileHelper) {
+        super(dataGenerator, blockTagProvider, TutorialMod.MODID, existingFileHelper);
+    }
 
     @Override
     protected void addTags() {

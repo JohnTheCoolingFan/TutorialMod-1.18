@@ -1,12 +1,12 @@
 package ru.jtcf.tutorial.setup;
 
-import ru.jtcf.tutorial.TutorialMod;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import ru.jtcf.tutorial.TutorialMod;
 
 public class ModTags {
     public static final class Blocks {
@@ -25,7 +25,7 @@ public class ModTags {
     public static final class Items {
         public static final TagKey<Item> ORES_SILVER = forge("ores/silver");
         public static final TagKey<Item> STORAGE_BLOCKS_SILVER = forge("storage_block/silver");
-        
+
         public static final TagKey<Item> INGOTS_SILVER = forge("ingots/silver");
 
         private static TagKey<Item> forge(String path) {

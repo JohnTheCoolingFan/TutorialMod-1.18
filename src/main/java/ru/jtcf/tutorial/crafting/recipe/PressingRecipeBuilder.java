@@ -79,7 +79,7 @@ public class PressingRecipeBuilder implements RecipeBuilder {
         private final ResourceLocation advancementId;
 
         public Result(ResourceLocation id, String group, Ingredient ingredient, int ingredient_count, Item result, int result_count, Advancement.Builder advancement, ResourceLocation advancement_id) {
-            this.id =  id;
+            this.id = id;
             this.group = group;
             this.ingredient = ingredient;
             this.ingredient_count = ingredient_count;

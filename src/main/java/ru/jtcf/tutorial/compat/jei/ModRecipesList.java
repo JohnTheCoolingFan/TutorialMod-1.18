@@ -16,8 +16,9 @@ public class ModRecipesList {
         ClientLevel world = minecraft.level;
         this.recipe_manager = world.getRecipeManager();
     }
+
     public List<PressingRecipe> getPressingRecipes() {
-        List<PressingRecipe> recipes =  recipe_manager.getAllRecipesFor(ModRecipes.Types.PRESSING.get());
+        List<PressingRecipe> recipes = recipe_manager.getAllRecipesFor(ModRecipes.Types.PRESSING.get());
         return recipes;
     }
 

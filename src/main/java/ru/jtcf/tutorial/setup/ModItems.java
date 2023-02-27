@@ -9,5 +9,6 @@ public class ModItems {
     public static final RegistryObject<Item> SILVER_INGOT = Registration.ITEMS.register("silver_ingot", () ->
             new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 
-    static void register () {}
+    static void register() {
+    }
 }

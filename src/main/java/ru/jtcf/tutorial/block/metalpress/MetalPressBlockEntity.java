@@ -51,7 +51,7 @@ public class MetalPressBlockEntity extends BaseContainerBlockEntity implements W
 
         @Override
         public int get(int index) {
-            return switch(index) {
+            return switch (index) {
                 case 0 -> progress;
                 case 1 -> energyStorage.getEnergyStored();
                 default -> 0;
@@ -60,7 +60,7 @@ public class MetalPressBlockEntity extends BaseContainerBlockEntity implements W
 
         @Override
         public void set(int index, int value) {
-            switch(index) {
+            switch (index) {
                 case 0 -> progress = value;
                 case 1 -> {
                     int energy_to_receive = value - energyStorage.getEnergyStored();

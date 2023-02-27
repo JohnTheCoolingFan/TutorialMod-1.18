@@ -11,9 +11,9 @@ import ru.jtcf.tutorial.setup.ModTags;
 
 public class ModBlockTagsProvider extends BlockTagsProvider {
 
-	public ModBlockTagsProvider(DataGenerator generatorIn, ExistingFileHelper existingFileHelper) {
-		super(generatorIn, TutorialMod.MODID, existingFileHelper);
-	}
+    public ModBlockTagsProvider(DataGenerator generatorIn, ExistingFileHelper existingFileHelper) {
+        super(generatorIn, TutorialMod.MODID, existingFileHelper);
+    }
 
     @Override
     protected void addTags() {

@@ -1,22 +1,21 @@
 package ru.jtcf.tutorial;
 
-import ru.jtcf.tutorial.setup.Registration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.jtcf.tutorial.setup.Registration;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(TutorialMod.MODID)
-public class TutorialMod
-{
+public class TutorialMod {
     public static final String MODID = "tutorial";
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public TutorialMod () {
+    public TutorialMod() {
         LOGGER.info("Registering stuff");
         Registration.register();
 

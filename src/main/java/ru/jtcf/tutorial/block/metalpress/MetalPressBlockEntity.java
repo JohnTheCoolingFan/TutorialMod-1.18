@@ -35,7 +35,6 @@ import javax.annotation.Nullable;
 // I have been told to not use the vanilla container classes and inetrfaces, but I think it's ok.
 public class MetalPressBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, BlockEntityTicker<MetalPressBlockEntity> {
     static final int WORK_TIME = 2 * 20;
-    static final int ENERGY_USAGE_PER_CYCLE = 100;
     static final int MAX_ENERGY = 10000;
     static final int MAX_TRANSFER = 100;
 
@@ -104,7 +103,7 @@ public class MetalPressBlockEntity extends BaseContainerBlockEntity implements W
         }
 
         PressingRecipe recipe = block_entity.getRecipe();
-        if (recipe != null && energyStorage.extractEnergy(ENERGY_USAGE_PER_CYCLE, true) >= ENERGY_USAGE_PER_CYCLE) {
+        if (recipe != null) {
             block_entity.doWork(recipe);
         } else {
             block_entity.stopWork();
@@ -113,7 +112,7 @@ public class MetalPressBlockEntity extends BaseContainerBlockEntity implements W
 
     @Nullable
     public PressingRecipe getRecipe() {
-        if (this.level == null || getItem(0).isEmpty()) {
+        if (this.level == null || getItem(0).isEmpty() || getEnergyStored() == 0) {
             return null;
         }
         return this.level.getRecipeManager().getRecipeFor(ModRecipes.Types.PRESSING.get(), this, this.level).orElse(null);
@@ -158,7 +157,7 @@ public class MetalPressBlockEntity extends BaseContainerBlockEntity implements W
         }
 
         progress = 0;
-        energyStorage.extractEnergy(ENERGY_USAGE_PER_CYCLE, false);
+        energyStorage.extractEnergy(recipe.getEnergyRequired(), false);
         this.removeItem(0, recipe.getIngredientCount());
         setChanged();
     }
@@ -170,6 +169,10 @@ public class MetalPressBlockEntity extends BaseContainerBlockEntity implements W
     @Override
     public int[] getSlotsForFace(Direction direction) {
         return new int[]{0, 1};
+    }
+
+    public int getEnergyStored() {
+        return energyStorage.getEnergyStored();
     }
 
     @Override

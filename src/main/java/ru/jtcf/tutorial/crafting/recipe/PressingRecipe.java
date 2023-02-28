@@ -12,6 +12,7 @@ import net.minecraft.world.item.crafting.SingleItemRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+import ru.jtcf.tutorial.block.metalpress.MetalPressBlockEntity;
 import ru.jtcf.tutorial.setup.ModRecipes;
 
 // Usually custom recipes should just implement Recipe<?> interface, but extending SingleItemRecipe allows using
@@ -20,22 +21,34 @@ import ru.jtcf.tutorial.setup.ModRecipes;
 // data builder as well, which mostly copies SingleItemRecipeBuilder.
 public class PressingRecipe extends SingleItemRecipe {
 	private final int ingredient_count;
+	private final int energyRequired;
 
 	public PressingRecipe(ResourceLocation recipeId,
 						  Ingredient ingredient,
 						  int ingredient_count,
-						  ItemStack result) {
+						  ItemStack result,
+						  int energyRequired) {
 		super(ModRecipes.Types.PRESSING.get(), ModRecipes.Serializers.PRESSING.get(), recipeId, "", ingredient, result);
 		this.ingredient_count = ingredient_count;
+		this.energyRequired = energyRequired;
 	}
 
 	@Override
 	public boolean matches(Container inv, Level world) {
-		return this.ingredient.test(inv.getItem(0)) && inv.getItem(0).getCount() >= ingredient_count;
+		if (inv instanceof MetalPressBlockEntity metal_press) {
+			return this.ingredient.test(metal_press.getItem(0)) &&
+					metal_press.getItem(0).getCount() >= ingredient_count &&
+					metal_press.getEnergyStored() >= energyRequired;
+		}
+		return false;
 	}
 
 	public int getIngredientCount() {
 		return ingredient_count;
+	}
+
+	public int getEnergyRequired() {
+		return energyRequired;
 	}
 
 	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<PressingRecipe> {
@@ -46,9 +59,10 @@ public class PressingRecipe extends SingleItemRecipe {
 			int ingredient_count = json.get("ingredient").getAsJsonObject().get("count").getAsInt();
 			ResourceLocation itemId = new ResourceLocation(GsonHelper.getAsString(json, "result"));
 			int count = GsonHelper.getAsInt(json, "count", 1);
+			int energyRequired = GsonHelper.getAsInt(json, "energy_required", 100);
 
 			ItemStack result = new ItemStack(ForgeRegistries.ITEMS.getValue(itemId), count);
-			return new PressingRecipe(recipeId, ingredient, ingredient_count, result);
+			return new PressingRecipe(recipeId, ingredient, ingredient_count, result, energyRequired);
 		}
 
 		@Override
@@ -56,7 +70,8 @@ public class PressingRecipe extends SingleItemRecipe {
 			Ingredient ingredient = Ingredient.fromNetwork(buffer);
 			int ingredient_count = buffer.readInt();
 			ItemStack result = buffer.readItem();
-			return new PressingRecipe(recipeId, ingredient, ingredient_count, result);
+			int energyRequired = buffer.readInt();
+			return new PressingRecipe(recipeId, ingredient, ingredient_count, result, energyRequired);
 		}
 
 		@Override
@@ -64,6 +79,7 @@ public class PressingRecipe extends SingleItemRecipe {
 			recipe.ingredient.toNetwork(buffer);
 			buffer.writeInt(recipe.ingredient_count);
 			buffer.writeItem(recipe.result);
+			buffer.writeInt(recipe.energyRequired);
 		}
 
 	}

@@ -40,7 +40,8 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_item", has(ModBlocks.SILVER_ORE.get()))
                 .save(consumer, modId("silver_ingot_blasting"));
 
-        new PressingRecipeBuilder(Ingredient.of(new ItemStack(ModItems.SILVER_INGOT.get())), 9, ModBlocks.SILVER_BLOCK.get(), 1)
+        new PressingRecipeBuilder(Ingredient.of(new ItemStack(ModItems.SILVER_INGOT.get())), 9,
+                ModBlocks.SILVER_BLOCK.get(), 1, 1000)
                 .unlockedBy("has_item", has(ModItems.SILVER_INGOT.get()))
                 .save(consumer, modId("silver_block_pressing"));
     }

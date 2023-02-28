@@ -25,17 +25,20 @@ public class PressingRecipeBuilder implements RecipeBuilder {
     private final int ingredient_count;
     private final Item result;
     private final int result_count;
+    private final int energyRequired;
 
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
     private String group;
 
     private static final RecipeSerializer<?> TYPE = ModRecipes.Serializers.PRESSING.get();
 
-    public PressingRecipeBuilder(Ingredient ingredient, int ingredient_count, ItemLike result, int result_count) {
+    public PressingRecipeBuilder(Ingredient ingredient, int ingredient_count, ItemLike result, int result_count,
+                                 int energyRequired) {
         this.ingredient = ingredient;
         this.ingredient_count = ingredient_count;
         this.result = result.asItem();
         this.result_count = result_count;
+        this.energyRequired = energyRequired;
     }
 
     @Override
@@ -65,7 +68,11 @@ public class PressingRecipeBuilder implements RecipeBuilder {
     public void save(Consumer<FinishedRecipe> consumer, ResourceLocation recipe_id) {
         ensureValid(recipe_id);
         this.advancement.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipe_id)).rewards(AdvancementRewards.Builder.recipe(recipe_id)).requirements(RequirementsStrategy.OR);
-        consumer.accept(new Result(recipe_id, this.group == null ? "" : this.group, this.ingredient, this.ingredient_count, this.result, this.result_count, this.advancement, new ResourceLocation(recipe_id.getNamespace(), "recipes/" + this.result.getItemCategory().getRecipeFolderName() + "/" + recipe_id.getPath())));
+        consumer.accept(new Result(recipe_id, this.group == null ? "" : this.group, this.ingredient,
+                this.ingredient_count, this.result, this.result_count, this.advancement,
+                new ResourceLocation(recipe_id.getNamespace(),
+                        "recipes/" + this.result.getItemCategory().getRecipeFolderName() + "/" + recipe_id.getPath())
+                , this.energyRequired));
     }
 
     private static class Result implements FinishedRecipe {
@@ -77,8 +84,11 @@ public class PressingRecipeBuilder implements RecipeBuilder {
         private final int result_count;
         private final Advancement.Builder advancement;
         private final ResourceLocation advancementId;
+        private final int energyRequired;
 
-        public Result(ResourceLocation id, String group, Ingredient ingredient, int ingredient_count, Item result, int result_count, Advancement.Builder advancement, ResourceLocation advancement_id) {
+        public Result(ResourceLocation id, String group, Ingredient ingredient, int ingredient_count, Item result,
+                      int result_count, Advancement.Builder advancement, ResourceLocation advancement_id,
+                      int energyRequired) {
             this.id = id;
             this.group = group;
             this.ingredient = ingredient;
@@ -87,6 +97,7 @@ public class PressingRecipeBuilder implements RecipeBuilder {
             this.result_count = result_count;
             this.advancement = advancement;
             this.advancementId = advancement_id;
+            this.energyRequired = energyRequired;
         }
 
         @Override
@@ -100,6 +111,7 @@ public class PressingRecipeBuilder implements RecipeBuilder {
             jsonObject.add("ingredient", ingredient_json);
             jsonObject.addProperty("result", ForgeRegistries.ITEMS.getKey(this.result).toString());
             jsonObject.addProperty("count", this.result_count);
+            jsonObject.addProperty("energy_required", this.energyRequired);
         }
 
         @Override

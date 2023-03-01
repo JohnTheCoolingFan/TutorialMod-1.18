@@ -18,7 +18,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void addTags() {
         tag(ModTags.Blocks.ORES_SILVER).add(ModBlocks.SILVER_ORE.get());
-        // Yes, now in 1.18 and up which tools mines and what grade itt need to be is set via tags.
+        // Yes, now in 1.18 and up which tools is required and what grade it needs to be is set via tags.
         tag(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.SILVER_ORE.get());
         tag(BlockTags.NEEDS_IRON_TOOL).add(ModBlocks.SILVER_ORE.get());
         tag(Tags.Blocks.ORES).addTag(ModTags.Blocks.ORES_SILVER);

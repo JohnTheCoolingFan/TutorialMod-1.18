@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
+import ru.jtcf.tutorial.setup.ModBlockEntityTypes;
 
 import javax.annotation.Nullable;
 
@@ -29,8 +30,7 @@ public class MetalPressBlock extends HorizontalDirectionalBlock implements Entit
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return level.isClientSide() ? null :
-                (level0, pos, state0, blockEntity) -> ((MetalPressBlockEntity) blockEntity).tick(level0, pos, state0, (MetalPressBlockEntity) blockEntity);
+        return type == ModBlockEntityTypes.METAL_PRESS.get() ? MetalPressBlockEntity::tick : null;
     }
 
     @Nullable

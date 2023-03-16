@@ -15,7 +15,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -32,8 +32,8 @@ import ru.jtcf.tutorial.setup.ModRecipes;
 
 import javax.annotation.Nullable;
 
-// I have been told to not use the vanilla container classes and inetrfaces, but I think it's ok.
-public class MetalPressBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer, BlockEntityTicker<MetalPressBlockEntity> {
+// I have been told to not use the vanilla container classes and interfaces, but I think it's ok.
+public class MetalPressBlockEntity extends BaseContainerBlockEntity implements WorldlyContainer {
     static final int WORK_TIME = 2 * 20;
     static final int MAX_ENERGY = 10000;
     static final int MAX_TRANSFER = 100;
@@ -96,17 +96,18 @@ public class MetalPressBlockEntity extends BaseContainerBlockEntity implements W
         buffer.writeByte(fields.getCount());
     }
 
-    @Override
-    public void tick(Level level, BlockPos pos, BlockState state, MetalPressBlockEntity block_entity) {
+    public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state,
+                                                    T block_entity) {
         if (level.isClientSide) {
             return;
         }
-
-        PressingRecipe recipe = block_entity.getRecipe();
-        if (recipe != null) {
-            block_entity.doWork(recipe);
-        } else {
-            block_entity.stopWork();
+        if (block_entity instanceof MetalPressBlockEntity metal_press_be) {
+            PressingRecipe recipe = metal_press_be.getRecipe();
+            if (recipe != null) {
+                metal_press_be.doWork(recipe);
+            } else {
+                metal_press_be.stopWork();
+            }
         }
     }
 

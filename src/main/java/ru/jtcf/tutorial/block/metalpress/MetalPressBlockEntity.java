@@ -263,8 +263,6 @@ public class MetalPressBlockEntity extends BaseContainerBlockEntity implements W
 
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        CompoundTag tags = this.getUpdateTag();
-        tags.put("Inventory", this.items.serializeNBT());
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
@@ -273,6 +271,7 @@ public class MetalPressBlockEntity extends BaseContainerBlockEntity implements W
         CompoundTag tags = super.getUpdateTag();
         tags.putInt("Progress", this.progress);
         tags.putInt("Energy", this.energyStorage.getEnergyStored());
+        tags.put("Inventory", this.items.serializeNBT());
         return tags;
     }
 
